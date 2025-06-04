@@ -34,6 +34,25 @@
       border-radius: 8px;
       box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     }
+    #timer {
+      font-size: 2.5em;
+      text-align: center;
+      margin: 20px 0;
+      color: #007bff;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 1.1em;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin: 5px;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
   </style>
 </head>
 <body>
@@ -47,23 +66,31 @@
 
   <div class="section">
     <h2>Short Description</h2>
-    <p>NTRL is your ideal companion for sports, training, and gym sessions in Benin.</p>
+    <p>NTRL is your ultimate fitness timer for gym workouts and training sessions.</p>
   </div>
 
   <div class="section">
     <h2>Long Description</h2>
-    <h3>NTRL - Elevate Your Fitness Journey in Benin!</h3>
-    <p>Whether you're a fitness enthusiast, a professional athlete, or just starting your training journey in Benin, NTRL is the app you need to find and book the best sports facilities, gyms, and training programs. With NTRL, explore a wide range of quality gyms, fitness centers, and sports activities across Benin’s major cities at competitive rates.</p>
+    <h3>NTRL - Power Your Fitness and Gym Workouts!</h3>
+    <p>Whether you're a fitness enthusiast, a professional athlete, or just starting your gym journey, NTRL is the perfect app to time and track your workouts. NTRL provides a simple, effective focus timer to keep you on track during strength training, cardio, HIIT, or group fitness sessions.</p>
     <h3>Key Features of NTRL:</h3>
     <ul>
-      <li>Intuitive search among thousands of gyms and training facilities in Benin</li>
-      <li>Real-time comparison of prices and availability for sessions and memberships</li>
-      <li>Secure and hassle-free booking for gym access and training programs</li>
-      <li>Detailed previews of facilities with photos, equipment lists, and user reviews</li>
-      <li>Option to book personal trainers, group classes, and sports activities</li>
+      <li>Customizable focus timer for workouts, rest intervals, and circuits</li>
+      <li>Easy-to-use start, pause, and reset controls for seamless timing</li>
+      <li>Track progress with detailed session history and stats</li>
+      <li>Visual and audio cues for time intervals and workout completion</li>
+      <li>Support for personal training and group fitness class timing</li>
       <li>Local customer support in French and English</li>
     </ul>
-    <p>Whether you’re seeking a high-end gym in Cotonou or a training camp in Ouidah, Benin, download NTRL now and let us guide you to achieve your fitness and sports goals!</p>
+    <p>From lifting weights to crushing HIIT sessions, download NTRL now and stay focused to achieve your fitness goals!</p>
+  </div>
+
+  <div class="section">
+    <h2>Focus Timer</h2>
+    <div id="timer">00:00</div>
+    <button onclick="startTimer()">Start</button>
+    <button onclick="pauseTimer()">Pause</button>
+    <button onclick="resetTimer()">Reset</button>
   </div>
 
   <div class="section">
@@ -81,5 +108,41 @@
     <h2>Privacy Policy</h2>
     <p><a href="https://ntrlapp.com/copyright_policy">https://ntrlapp.com/copyright_policy</a></p>
   </div>
+
+  <script>
+    let time = 0;
+    let timerInterval = null;
+    const timerDisplay = document.getElementById('timer');
+
+    function updateTimer() {
+      const minutes = Math.floor(time / 60);
+      const seconds = time % 60;
+      timerDisplay.textContent = 
+        `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+    }
+
+    function startTimer() {
+      if (!timerInterval) {
+        timerInterval = setInterval(() => {
+          time++;
+          updateTimer();
+        }, 1000);
+      }
+    }
+
+    function pauseTimer() {
+      clearInterval(timerInterval);
+      timerInterval = null;
+    }
+
+    function resetTimer() {
+      clearInterval(timerInterval);
+      timerInterval = null;
+      time = 0;
+      updateTimer();
+    }
+
+    updateTimer();
+  </script>
 </body>
 </html>
